@@ -105,6 +105,14 @@ static void run() {
         al_wait_for_event(queue, &event);
 
         switch (event.type) {
+            
+            /* Kad pele iziet no loga */
+            case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
+                break;
+            
+            /* Kad pele atgriežas logā*/
+            case ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY:
+                break;
 
                 /* Kad maina loga izmēru*/
             case ALLEGRO_EVENT_DISPLAY_RESIZE:
