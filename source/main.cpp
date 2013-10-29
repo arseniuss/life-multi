@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 
     if (!al_init())
         abort("Could not init Allegro!");
-    
+
     al_set_app_name(APP_NAME);
 
     uint32_t version = al_get_allegro_version();
@@ -56,6 +56,9 @@ int main(int argc, char** argv) {
 
     if (!al_init_ttf_addon())
         abort("Could not inir ttf addon!");
+    
+    //TODO: configuration allow or disallow resize
+    al_set_new_display_flags(ALLEGRO_RESIZABLE);
 
     //TODO: detect display or use configuration
     if (!(display = al_create_display(500, 500)))
@@ -102,6 +105,11 @@ static void run() {
         al_wait_for_event(queue, &event);
 
         switch (event.type) {
+
+                /* Kad maina loga izmēru*/
+            case ALLEGRO_EVENT_DISPLAY_RESIZE:
+                al_acknowledge_resize(event.display.source);
+                break;
 
                 /* Kad aizver logu */
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
