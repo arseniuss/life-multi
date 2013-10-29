@@ -32,3 +32,8 @@ using namespace std;
                         fprintf(stderr, "%s:%d: ", __FILE__, __LINE__);        \
                         fprintf(stderr, fmt, ##__VA_ARGS__);                   \
                 } while(0);
+
+#define log(fmt, ...)                                                          \
+                printf(fmt, ##__VA_ARGS__)
+
+void draw_stats();

@@ -36,6 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/StateMenu.o \
+	${OBJECTDIR}/source/debug.o \
+	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/main.o
 
 
@@ -53,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lallegro_ttf
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -67,6 +69,16 @@ ${OBJECTDIR}/source/StateMenu.o: source/StateMenu.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
+
+${OBJECTDIR}/source/debug.o: source/debug.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/debug.o source/debug.cpp
+
+${OBJECTDIR}/source/draw_text.o: source/draw_text.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
 
 ${OBJECTDIR}/source/main.o: source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source

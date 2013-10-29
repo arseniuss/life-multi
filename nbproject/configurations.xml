@@ -3,13 +3,15 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="include" displayName="include" projectFiles="true">
       <itemPath>include/State.h</itemPath>
-      <itemPath>source/StateMenu.h</itemPath>
-      <itemPath>source/config.h</itemPath>
-      <itemPath>source/debug.h</itemPath>
-      <itemPath>source/global.h</itemPath>
+      <itemPath>include/StateMenu.h</itemPath>
+      <itemPath>include/config.h</itemPath>
+      <itemPath>include/debug.h</itemPath>
+      <itemPath>include/global.h</itemPath>
     </logicalFolder>
     <logicalFolder name="source" displayName="source" projectFiles="true">
       <itemPath>source/StateMenu.cpp</itemPath>
+      <itemPath>source/debug.cpp</itemPath>
+      <itemPath>source/draw_text.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -41,7 +43,6 @@
         <cTool>
           <incDir>
             <pElem>include</pElem>
-            <pElem>/usr/local/include/allegro5</pElem>
           </incDir>
           <preprocessorList>
             <Elem>DEBUG</Elem>
@@ -51,7 +52,6 @@
         <ccTool>
           <incDir>
             <pElem>include</pElem>
-            <pElem>/usr/local/include/allegro5</pElem>
           </incDir>
           <preprocessorList>
             <Elem>DEBUG</Elem>
@@ -62,20 +62,27 @@
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
             <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
+            <linkerLibLibItem>allegro_font</linkerLibLibItem>
+            <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      <item path="source/debug.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/config.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -112,20 +119,27 @@
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
             <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
+            <linkerLibLibItem>allegro_font</linkerLibLibItem>
+            <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      <item path="source/debug.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/config.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -144,18 +158,31 @@
         <ccTool>
           <warningLevel>2</warningLevel>
         </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>allegro</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
+            <linkerLibLibItem>allegro_font</linkerLibLibItem>
+            <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      <item path="source/debug.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/config.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -174,18 +201,31 @@
         <ccTool>
           <warningLevel>2</warningLevel>
         </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>allegro</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
+            <linkerLibLibItem>allegro_font</linkerLibLibItem>
+            <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      <item path="source/debug.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/config.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>

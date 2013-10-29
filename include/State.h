@@ -22,6 +22,8 @@
 
 #    include <allegro5/allegro.h>
 
+#    include "debug.h"
+
 /* Nezināms spēles stāvoklis */
 #    define STATE_UNKNOWN                   0
 /* Vienkarši izejams stāvoklis (nav jāsaglabā) */

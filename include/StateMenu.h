@@ -13,6 +13,8 @@
 
 class StateMenu : public State {
 public:
+    typedef State super;
+    
     StateMenu();
     void draw();
     void user_key(int key);

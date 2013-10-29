@@ -8,3 +8,7 @@
 #pragma once
 
 #define FPS             32
+
+#define APP_NAME                        "Life Game Multiplayer"
+
+#define XSMALLFONT_TTF                  "resources/DejaVuSans.ttf"

@@ -36,6 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/source/StateMenu.o \
+	${OBJECTDIR}/source/debug.o \
+	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/main.o
 
 
@@ -53,7 +55,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lallegro -lallegro_primitives
+LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lallegro_ttf
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -66,12 +68,22 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi: ${OBJECTFILES}
 ${OBJECTDIR}/source/StateMenu.o: nbproject/Makefile-${CND_CONF}.mk source/StateMenu.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/usr/local/include/allegro5 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
+
+${OBJECTDIR}/source/debug.o: nbproject/Makefile-${CND_CONF}.mk source/debug.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/debug.o source/debug.cpp
+
+${OBJECTDIR}/source/draw_text.o: nbproject/Makefile-${CND_CONF}.mk source/draw_text.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
 
 ${OBJECTDIR}/source/main.o: nbproject/Makefile-${CND_CONF}.mk source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/usr/local/include/allegro5 -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
 # Subprojects
 .build-subprojects:

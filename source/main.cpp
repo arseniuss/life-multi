@@ -6,6 +6,9 @@
  */
 
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include <cstdlib>
 #include <iostream>
 
@@ -27,6 +30,18 @@ int main(int argc, char** argv) {
 
     if (!al_init())
         abort("Could not init Allegro!");
+    
+    al_set_app_name(APP_NAME);
+
+    uint32_t version = al_get_allegro_version();
+    int major = version >> 24;
+    int minor = (version >> 16) & 255;
+    int revision = (version >> 8) & 255;
+    int release = version & 255;
+
+    log("found Allegro %d.%d.%d[%d]\n", major, minor, revision, release);
+
+    //TODO: check if is usable Allegro version
 
     if (!al_install_keyboard())
         abort("Could not install keyboard!");
@@ -34,9 +49,20 @@ int main(int argc, char** argv) {
     if (!al_install_mouse())
         abort("Could not install mouse!");
 
+    if (!al_init_image_addon())
+        abort("Could not init image addon!");
+
+    al_init_font_addon();
+
+    if (!al_init_ttf_addon())
+        abort("Could not inir ttf addon!");
+
     //TODO: detect display or use configuration
     if (!(display = al_create_display(500, 500)))
         abort("Could not create display!");
+
+    if (!(xsmall_font = al_load_ttf_font(XSMALLFONT_TTF, 10, 0)))
+        abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
     run();
 
@@ -66,7 +92,10 @@ static void run() {
 
     while (app.loop) {
         if (need_redraw && al_event_queue_is_empty(queue)) {
+            al_clear_to_color(al_map_rgb(0, 0, 0));
+            draw_stats();
             current_state->draw();
+            al_flip_display();
             need_redraw = false;
         }
 
