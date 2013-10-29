@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="include" displayName="include" projectFiles="true">
+      <itemPath>source/config.h</itemPath>
+      <itemPath>source/debug.h</itemPath>
+      <itemPath>source/global.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="source" displayName="source" projectFiles="true">
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
@@ -38,6 +43,7 @@
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
+          <warningLevel>2</warningLevel>
         </cTool>
         <ccTool>
           <incDir>
@@ -47,6 +53,7 @@
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
+          <warningLevel>2</warningLevel>
         </ccTool>
         <linkerTool>
           <linkerLibItems>
@@ -55,6 +62,12 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="source/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -71,12 +84,14 @@
           <incDir>
             <pElem>include</pElem>
           </incDir>
+          <warningLevel>2</warningLevel>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
           <incDir>
             <pElem>include</pElem>
           </incDir>
+          <warningLevel>2</warningLevel>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -91,6 +106,12 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="source/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -102,7 +123,19 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <cTool>
+          <warningLevel>2</warningLevel>
+        </cTool>
+        <ccTool>
+          <warningLevel>2</warningLevel>
+        </ccTool>
       </compileType>
+      <item path="source/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -114,7 +147,19 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <cTool>
+          <warningLevel>2</warningLevel>
+        </cTool>
+        <ccTool>
+          <warningLevel>2</warningLevel>
+        </ccTool>
       </compileType>
+      <item path="source/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/debug.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/global.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
