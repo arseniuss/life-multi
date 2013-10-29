@@ -2,11 +2,14 @@
 <configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="include" displayName="include" projectFiles="true">
+      <itemPath>include/State.h</itemPath>
+      <itemPath>source/StateMenu.h</itemPath>
       <itemPath>source/config.h</itemPath>
       <itemPath>source/debug.h</itemPath>
       <itemPath>source/global.h</itemPath>
     </logicalFolder>
     <logicalFolder name="source" displayName="source" projectFiles="true">
+      <itemPath>source/StateMenu.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -62,6 +65,12 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="source/debug.h" ex="false" tool="3" flavor2="0">
@@ -106,6 +115,12 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="source/debug.h" ex="false" tool="3" flavor2="0">
@@ -130,6 +145,12 @@
           <warningLevel>2</warningLevel>
         </ccTool>
       </compileType>
+      <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="source/debug.h" ex="false" tool="3" flavor2="0">
@@ -154,6 +175,12 @@
           <warningLevel>2</warningLevel>
         </ccTool>
       </compileType>
+      <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/config.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="source/debug.h" ex="false" tool="3" flavor2="0">

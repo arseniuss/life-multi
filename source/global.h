@@ -5,14 +5,18 @@
  * Created on otrdiena, 2013, 29 oktobris, 13:25
  */
 
-#ifndef GLOBAL_H
-#    define	GLOBAL_H
+#pragma once
 
 #include <allegro5/allegro.h>
 
+class App {
+public:
+    bool loop;
+
+    App() : loop(true) {
+    };
+};
+
+extern App app;
+
 extern ALLEGRO_DISPLAY *display;
-
-
-
-#endif	/* GLOBAL_H */
-

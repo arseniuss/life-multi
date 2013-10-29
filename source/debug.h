@@ -5,34 +5,30 @@
  * Created on otrdiena, 2013, 29 oktobris, 13:11
  */
 
-#ifndef DEBUG_H
-#    define	DEBUG_H
+#pragma once
 
-#    ifdef __cplusplus
-#        include <cstdio>
+#ifdef __cplusplus
+#    include <cstdio>
 
 using namespace std;
 
-#    else
-#        include <stdio.h>
-#    endif
+#else
+#    include <stdio.h>
+#endif
 
 /** Labošanas paziņojumi, kas parādās tikai DEBUG versijā */
-#    ifdef DEBUG
-#        define debug(fmt, ...)                                                \
+#ifdef DEBUG
+#    define debug(fmt, ...)                                                    \
                         do {                                                   \
                                 printf("%s:%d: ", __FILE__, __LINE__);         \
                                 printf(fmt, ##__VA_ARGS__);                    \
                         } while(0);
-#    else
-#        define debug(fmt, ...)
-#    endif
+#else
+#    define debug(fmt, ...)
+#endif
 
-#    define abort(fmt, ...)                                                    \
+#define abort(fmt, ...)                                                        \
                 do {                                                           \
                         fprintf(stderr, "%s:%d: ", __FILE__, __LINE__);        \
                         fprintf(stderr, fmt, ##__VA_ARGS__);                   \
                 } while(0);
-
-
-#endif	/* DEBUG_H */

@@ -9,13 +9,18 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "State.h"
+#include "StateMenu.h"
 #include "config.h"
 #include "debug.h"
+#include "global.h"
 
 using namespace std;
 
 ALLEGRO_DISPLAY *display = NULL;
+State *current_state = NULL;
 
+App app;
 static void run();
 
 int main(int argc, char** argv) {
@@ -57,32 +62,59 @@ static void run() {
 
     ALLEGRO_EVENT event;
     bool need_redraw = false;
+    current_state = new StateMenu;
 
-    while (true) {
+    while (app.loop) {
         if (need_redraw && al_event_queue_is_empty(queue)) {
-            //draw();
+            current_state->draw();
             need_redraw = false;
         }
 
         al_wait_for_event(queue, &event);
 
         switch (event.type) {
+
+                /* Kad aizver logu */
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                return;
-            case ALLEGRO_EVENT_KEY_CHAR:
-                if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+                if (current_state->type == STATE_GAME) {
+                    //goto StateSave(current_state)
+                } else {
                     return;
                 }
                 break;
+
+                /* Kad nospiež kādu klaviatūras taustiņu*/
+            case ALLEGRO_EVENT_KEY_CHAR:
+                current_state->user_key(event.keyboard.keycode);
+                break;
+
+                /* Taimeris */
             case ALLEGRO_EVENT_TIMER:
                 need_redraw = true;
+                break;
+
+                /* Kad pakustina peli */
+            case ALLEGRO_EVENT_MOUSE_AXES:
+                current_state->user_mouse(event.mouse.x, event.mouse.y, 0);
+                break;
+
+                /* Kad nospiež peles pogu */
+            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+                current_state->user_mouse(event.mouse.x, event.mouse.y,
+                        event.mouse.button);
+                break;
+
+                /* Kad paceļ peles pogu */
+            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+                current_state->user_mouse(event.mouse.x, event.mouse.y,
+                        event.mouse.button);
                 break;
             default:
                 debug("Unknown event {type: %d}\n", event.type);
                 break;
         }
     }
-    
+
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
 }
