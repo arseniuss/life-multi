@@ -38,7 +38,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/StateMenu.o \
 	${OBJECTDIR}/source/debug.o \
 	${OBJECTDIR}/source/draw_text.o \
-	${OBJECTDIR}/source/main.o
+	${OBJECTDIR}/source/life.o \
+	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/map.o
 
 
 # C Compiler Flags
@@ -80,10 +82,20 @@ ${OBJECTDIR}/source/draw_text.o: nbproject/Makefile-${CND_CONF}.mk source/draw_t
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
 
+${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
+
 ${OBJECTDIR}/source/main.o: nbproject/Makefile-${CND_CONF}.mk source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+
+${OBJECTDIR}/source/map.o: nbproject/Makefile-${CND_CONF}.mk source/map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/map.o source/map.cpp
 
 # Subprojects
 .build-subprojects:

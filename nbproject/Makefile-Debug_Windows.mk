@@ -38,7 +38,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/StateMenu.o \
 	${OBJECTDIR}/source/debug.o \
 	${OBJECTDIR}/source/draw_text.o \
-	${OBJECTDIR}/source/main.o
+	${OBJECTDIR}/source/life.o \
+	${OBJECTDIR}/source/main.o \
+	${OBJECTDIR}/source/map.o
 
 
 # C Compiler Flags
@@ -80,10 +82,20 @@ ${OBJECTDIR}/source/draw_text.o: source/draw_text.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
 
+${OBJECTDIR}/source/life.o: source/life.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
+
 ${OBJECTDIR}/source/main.o: source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+
+${OBJECTDIR}/source/map.o: source/map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/map.o source/map.cpp
 
 # Subprojects
 .build-subprojects:
