@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
 
     if (!al_init_ttf_addon())
         abort("Could not inir ttf addon!");
-    
+
     //TODO: configuration allow or disallow resize
     al_set_new_display_flags(ALLEGRO_RESIZABLE);
 
@@ -105,12 +105,12 @@ static void run() {
         al_wait_for_event(queue, &event);
 
         switch (event.type) {
-            
-            /* Kad pele iziet no loga */
+
+                /* Kad pele iziet no loga */
             case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
                 break;
-            
-            /* Kad pele atgriežas logā*/
+
+                /* Kad pele atgriežas logā*/
             case ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY:
                 break;
 
