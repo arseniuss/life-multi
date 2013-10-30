@@ -10,6 +10,10 @@ Version 1.0:
 - Simple interface
 - Playing trough internet
 
+## Build ##
+
+Requires Allegro version > 5.1.0
+
 ## License ##
 
 _Life Game multiplayer_ is licensed under GNU GPL v3+ __WITHOUT ANY WARRANTY__
