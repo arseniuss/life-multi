@@ -9,6 +9,7 @@
 
 #ifdef __cplusplus
 #    include <cstdio>
+#    include <cstdlib>
 
 using namespace std;
 
@@ -31,6 +32,7 @@ using namespace std;
                 do {                                                           \
                         fprintf(stderr, "%s:%d: ", __FILE__, __LINE__);        \
                         fprintf(stderr, fmt, ##__VA_ARGS__);                   \
+                        exit(-1);                                              \
                 } while(0);
 
 #define log(fmt, ...)                                                          \
