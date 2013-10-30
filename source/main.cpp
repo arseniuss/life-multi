@@ -63,7 +63,9 @@ int main(int argc, char** argv) {
     //TODO: detect display or use configuration
     if (!(display = al_create_display(500, 500)))
         abort("Could not create display!");
-
+    
+    al_set_window_constraints(display, MIN_DISPLAY_WIDTH, MIN_DISPLAY_HEIGHT, 1024, 1024);
+    
     if (!(xsmall_font = al_load_ttf_font(XSMALLFONT_TTF, 10, 0)))
         abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
