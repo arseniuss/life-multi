@@ -12,7 +12,9 @@
       <itemPath>source/StateMenu.cpp</itemPath>
       <itemPath>source/debug.cpp</itemPath>
       <itemPath>source/draw_text.cpp</itemPath>
+      <itemPath>source/life.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
+      <itemPath>source/map.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -84,7 +86,11 @@
       </item>
       <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="source/life.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release_Linux" type="1">
@@ -141,7 +147,11 @@
       </item>
       <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="source/life.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Debug_Windows" type="1">
@@ -184,7 +194,11 @@
       </item>
       <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="source/life.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release_Windows" type="1">
@@ -227,7 +241,11 @@
       </item>
       <item path="source/draw_text.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="source/life.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
