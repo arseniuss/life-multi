@@ -1,8 +1,8 @@
 /* 
- * File:   main.cpp
+ * File:   StateMenu.cpp
  * Author: arseniuss
  *
- * Created on otrdiena, 2013, 29 oktobris, 114:49
+ * Created on otrdiena, 2013, 29 oktobris, 14:49
  */
 
 #include <allegro5/allegro.h>
