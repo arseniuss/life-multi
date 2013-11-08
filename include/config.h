@@ -30,3 +30,4 @@
 
 #define MIN_DISPLAY_WIDTH               500
 #define MIN_DISPLAY_HEIGHT              500
+#define MIN_TILE_SIZE                   8

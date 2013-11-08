@@ -6,13 +6,15 @@
  */
 
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <cstdlib>
 #include <iostream>
 
 #include "State.h"
+#include "StateGame.h"
 #include "StateMenu.h"
 #include "config.h"
 #include "debug.h"
@@ -43,6 +45,17 @@ int main(int argc, char** argv) {
 
     //TODO: check if is usable Allegro version
 
+    //TODO: configuration allow or disallow resize
+    al_set_new_display_flags(ALLEGRO_RESIZABLE);
+
+    //TODO: detect display or use configuration
+    if (!(display = al_create_display(500, 500)))
+        abort("Could not create display!");
+
+    al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
+
+    al_set_window_constraints(display, MIN_DISPLAY_WIDTH, MIN_DISPLAY_HEIGHT, 0, 0);
+
     if (!al_install_keyboard())
         abort("Could not install keyboard!");
 
@@ -52,25 +65,30 @@ int main(int argc, char** argv) {
     if (!al_init_image_addon())
         abort("Could not init image addon!");
 
-    al_init_font_addon();
+    if (!al_init_primitives_addon())
+        abort("Could not init primitives addon!");
+
+    if (!al_init_font_addon())
+        abort("Could not init font addon!");
 
     if (!al_init_ttf_addon())
-        abort("Could not inir ttf addon!");
+        abort("Could not init ttf addon!");
 
-    //TODO: configuration allow or disallow resize
-    al_set_new_display_flags(ALLEGRO_RESIZABLE);
-
-    //TODO: detect display or use configuration
-    if (!(display = al_create_display(500, 500)))
-        abort("Could not create display!");
-    
-    al_set_window_constraints(display, MIN_DISPLAY_WIDTH, MIN_DISPLAY_HEIGHT, 0, 0);
-    
     if (!(xsmall_font = al_load_ttf_font(XSMALLFONT_TTF, 10, 0)))
         abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
     run();
-
+    
+    al_free(xsmall_font);
+    al_shutdown_ttf_addon();
+    al_shutdown_font_addon();
+    al_shutdown_primitives_addon();
+    al_shutdown_image_addon();
+    al_uninstall_mouse();
+    al_uninstall_keyboard();
+    al_destroy_display(display);
+    al_uninstall_system();
+           
     return 0;
 }
 
@@ -93,13 +111,13 @@ static void run() {
 
     ALLEGRO_EVENT event;
     bool need_redraw = false;
-    current_state = new StateMenu;
+    current_state = new StateGame;
 
     while (app.loop) {
         if (need_redraw && al_event_queue_is_empty(queue)) {
-            al_clear_to_color(al_map_rgb(0, 0, 0));
-            draw_stats();
             current_state->draw();
+            draw_stats();
+            al_wait_for_vsync();
             al_flip_display();
             need_redraw = false;
         }
@@ -107,7 +125,6 @@ static void run() {
         al_wait_for_event(queue, &event);
 
         switch (event.type) {
-
                 /* Kad pele iziet no loga */
             case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
                 break;
@@ -119,6 +136,8 @@ static void run() {
                 /* Kad maina loga izmēru*/
             case ALLEGRO_EVENT_DISPLAY_RESIZE:
                 al_acknowledge_resize(event.display.source);
+                current_state->user_display();
+                need_redraw = true;
                 break;
 
                 /* Kad aizver logu */
@@ -142,19 +161,24 @@ static void run() {
 
                 /* Kad pakustina peli */
             case ALLEGRO_EVENT_MOUSE_AXES:
-                current_state->user_mouse(event.mouse.x, event.mouse.y, 0);
+                current_state->user_mouse(event.mouse.x, event.mouse.y,
+                        event.mouse.z, event.mouse.dx, event.mouse.dy, 
+                        event.mouse.dz);
+                need_redraw = true;
                 break;
 
                 /* Kad nospiež peles pogu */
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                current_state->user_mouse(event.mouse.x, event.mouse.y,
-                        event.mouse.button);
+                current_state->user_mouse_down(event.mouse.x, event.mouse.y,
+                        event.mouse.z, event.mouse.dx, event.mouse.dy, 
+                        event.mouse.dz, event.mouse.button);
                 break;
 
                 /* Kad paceļ peles pogu */
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-                current_state->user_mouse(event.mouse.x, event.mouse.y,
-                        event.mouse.button);
+                current_state->user_mouse_up(event.mouse.x, event.mouse.y,
+                        event.mouse.z, event.mouse.dx, event.mouse.dy, 
+                        event.mouse.dz, event.mouse.button);
                 break;
             default:
                 debug("Unknown event {type: %d}\n", event.type);
@@ -162,6 +186,7 @@ static void run() {
         }
     }
 
-    al_destroy_timer(timer);
+    al_stop_timer(timer);
+    al_destroy_timer(timer); 
     al_destroy_event_queue(queue);
 }

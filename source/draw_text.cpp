@@ -14,12 +14,12 @@
 #include <cstdio>
 #include <cstring>
 
-void draw_text(ALLEGRO_FONT *font, ALLEGRO_COLOR color, float x, float y,
+void draw_text(ALLEGRO_FONT *font, ALLEGRO_COLOR color, int x, int y,
         const char *text) {
     char *atext = (char *)malloc(strlen(text)+1);
     strcpy(atext, text);
     char *pch = strtok(atext, "\n");
-    float starty = y;
+    int starty = y;
      
     while(pch != NULL) {
         al_draw_text(font, color, x, starty, 0, pch);

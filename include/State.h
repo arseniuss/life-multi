@@ -51,7 +51,22 @@ public:
     virtual void user_key(int key) {
     }; //TODO: modifiers?
 
-    virtual void user_mouse(int x, int y, int button) {
+    virtual void user_mouse(int x, int y, int z, int dx, int dy, int dz) {
+    };
+
+    virtual void user_display() {
+    };
+
+    virtual void user_mouse_down(int x, int y, int z, int dx, int dy, int dz,
+            int button) {
+    };
+
+    virtual void user_mouse_up(int x, int y, int z, int dx, int dy, int dz,
+            int button) {
+    };
+
+    virtual const char * stats() {
+        return NULL;
     };
 };
 

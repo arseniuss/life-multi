@@ -35,13 +35,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/source/Map.o \
 	${OBJECTDIR}/source/StateGame.o \
 	${OBJECTDIR}/source/StateMenu.o \
 	${OBJECTDIR}/source/debug.o \
 	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/life.o \
 	${OBJECTDIR}/source/main.o \
-	${OBJECTDIR}/source/map.o \
 	${OBJECTDIR}/source/network.o
 
 
@@ -68,6 +68,11 @@ LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lal
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/source/Map.o: nbproject/Makefile-${CND_CONF}.mk source/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Map.o source/Map.cpp
 
 ${OBJECTDIR}/source/StateGame.o: nbproject/Makefile-${CND_CONF}.mk source/StateGame.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -98,11 +103,6 @@ ${OBJECTDIR}/source/main.o: nbproject/Makefile-${CND_CONF}.mk source/main.cpp
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
-
-${OBJECTDIR}/source/map.o: nbproject/Makefile-${CND_CONF}.mk source/map.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Wall -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/map.o source/map.cpp
 
 ${OBJECTDIR}/source/network.o: nbproject/Makefile-${CND_CONF}.mk source/network.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
