@@ -2,6 +2,7 @@
 <configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="include" displayName="include" projectFiles="true">
+      <itemPath>include/Map.h</itemPath>
       <itemPath>include/State.h</itemPath>
       <itemPath>include/StateGame.h</itemPath>
       <itemPath>include/StateMenu.h</itemPath>
@@ -74,6 +75,8 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
@@ -143,6 +146,8 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
@@ -198,6 +203,8 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
@@ -253,6 +260,8 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">

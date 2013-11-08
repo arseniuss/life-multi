@@ -10,6 +10,9 @@
 #include "State.h"
 
 class StateGame : public State {
+private:
+    int generation;
+    //Map map;
 public:
     StateGame();
     ~StateGame();
