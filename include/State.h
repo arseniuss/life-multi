@@ -46,6 +46,9 @@ public:
     /* Pārzīmē stāvokli uz ekrāna */
     virtual void draw() {
     };
+    
+    virtual void update() {   
+    };
 
     /* Apstrādā lietotaja nospiesto tastatūras taustiņu */
     virtual void user_key(int key) {

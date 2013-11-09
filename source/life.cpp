@@ -19,16 +19,9 @@
  */
 
 #include "debug.h"
-
-#define TILE_FREE       0
-#define TILE_WALL       3
-
-#define TILE_PLAYER1    1
-#define TILE_PLAYER2    2
-
-typedef char part_t[3][3];
-
-typedef char (*life_fn_t)(part_t);
+#include "global.h"
+#include "Map.h"
+#include "StateGame.h"
 
 //Noteikumu vertības            (tiek ||)
 
@@ -54,42 +47,63 @@ const char rules[5][5] = {
 /**
  * Funkcija atgriež, vai šuna, kas ir [1;1] dzīvo vai nē
  * 
- * @param map 3x3 mapes daļa
  * @return TILE_* vērtiba
  */
-char conways_fn(part_t map) {
-    //ja valnis -> paliek
-    if (map[1][1] == TILE_WALL) return TILE_WALL;
-
-    int x, y;
+char conways_fn(int x, int y) {
     int pl1 = 0, pl2 = 0;
 
     //saskaita cik ir attiecīgo spēlētāju šunas ap šo laukumu
-    for (x = 0; x < 3; x++)
-        for (y = 0; y < 3; y++) {
-            if (x == y && x == 1) continue;
-            pl1 += (map[x][y] == TILE_PLAYER1 ? 1 : 0);
-            pl2 += (map[x][y] == TILE_PLAYER1 ? 1 : 0);
+    for (int i = -1; i <= 1; i++)
+        for (int j = -1; j <= 1; j++) {
+            if (i == j && j == 0) continue;
+
+            switch (current_game->map.pos(x + i, y + j)) {
+                case TILE_PLAYER1: pl1++;
+                    break;
+                case TILE_SEEN_PLAYER2:
+                case TILE_PLAYER2: pl2++;
+                    break;
+
+            }
         }
-    
-    if(pl1 > 4 || pl2 > 4) return TILE_FREE;
-    
-    switch(rules[pl1][pl2]) {
+
+    int pos = current_game->map.pos(x, y);
+
+    if (pl1 > 4) return TILE_FREE;
+    if (pl2 > 4) {
+        if (pos == TILE_SEEN_PLAYER2 || pos == TILE_FREE)
+            return TILE_FREE;
+        else
+            return TILE_UNKNOWN;
+    }
+
+
+    switch (rules[pl1][pl2]) {
         case RULE_DIE:
+            if (pos == TILE_PLAYER2) return TILE_UNKNOWN;
+            if (pos == TILE_UNKNOWN) return TILE_UNKNOWN;
             return TILE_FREE;
         case RULE_STAY:
-            return map[1][1];
+            if (pl1 > 0 && pos == TILE_UNKNOWN) return TILE_FREE;
+            if (pl1 > 0 && pos == TILE_PLAYER2) return TILE_SEEN_PLAYER2;
+            return pos;
         case RULE_CREATE:
-            if(pl1 > pl2) return TILE_PLAYER1;
-            if(pl2 < pl1) return TILE_PLAYER2;
-            return TILE_FREE;
+            if (pl1 > pl2) return TILE_PLAYER1;
+            else {
+                if (pos == TILE_SEEN_PLAYER2 || pos == TILE_FREE)
+                    return TILE_SEEN_PLAYER2;
+                return TILE_PLAYER2;
+            }
         case RULE_CREATE_STAY:
-            if(pl1 > pl2) return TILE_PLAYER1;
-            if(pl2 < pl1) return TILE_PLAYER2;
-            return map[1][1];
+            if (pl1 > pl2) return TILE_PLAYER1;
+            else {
+                if (pos == TILE_SEEN_PLAYER2 || pos == TILE_FREE)
+                    return TILE_SEEN_PLAYER2;
+                return TILE_PLAYER2;
+            }
     }
-    
+
     abort("Error while processing game logic!");
-    
+
     return 0; //:)
 }

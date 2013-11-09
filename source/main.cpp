@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
         abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
     run();
-    
+
     al_free(xsmall_font);
     al_shutdown_ttf_addon();
     al_shutdown_font_addon();
@@ -88,13 +88,14 @@ int main(int argc, char** argv) {
     al_uninstall_keyboard();
     al_destroy_display(display);
     al_uninstall_system();
-           
+
     return 0;
 }
 
 static void run() {
     ALLEGRO_EVENT_QUEUE *queue;
     ALLEGRO_TIMER *timer;
+    ALLEGRO_TIMER *game_update;
 
     if (!(queue = al_create_event_queue()))
         abort("Count not create event queue!");
@@ -102,16 +103,22 @@ static void run() {
     if (!(timer = al_create_timer(1.0 / FPS)))
         abort("Count not create timer!");
 
+    if (!(game_update = al_create_timer(1.0/8.0)))
+        abort("Could not create game update timer!");
+
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
     al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_timer_event_source(game_update));
     al_register_event_source(queue, al_get_display_event_source(display));
 
     al_start_timer(timer);
+    al_start_timer(game_update);
 
     ALLEGRO_EVENT event;
-    bool need_redraw = false;
-    current_state = new StateGame;
+    bool need_redraw = false;  
+    current_game = new StateGame;
+    current_state = current_game;
 
     while (app.loop) {
         if (need_redraw && al_event_queue_is_empty(queue)) {
@@ -154,15 +161,26 @@ static void run() {
                 current_state->user_key(event.keyboard.keycode);
                 break;
 
+            case ALLEGRO_EVENT_KEY_DOWN:
+                break;
+            case ALLEGRO_EVENT_KEY_UP:
+                break;
+
                 /* Taimeris */
             case ALLEGRO_EVENT_TIMER:
-                need_redraw = true;
+                if (event.timer.source == game_update) {
+                    current_state->update();
+                }
+
+                if (event.timer.source == timer) {
+                    need_redraw = true;
+                }
                 break;
 
                 /* Kad pakustina peli */
             case ALLEGRO_EVENT_MOUSE_AXES:
                 current_state->user_mouse(event.mouse.x, event.mouse.y,
-                        event.mouse.z, event.mouse.dx, event.mouse.dy, 
+                        event.mouse.z, event.mouse.dx, event.mouse.dy,
                         event.mouse.dz);
                 need_redraw = true;
                 break;
@@ -170,14 +188,14 @@ static void run() {
                 /* Kad nospiež peles pogu */
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
                 current_state->user_mouse_down(event.mouse.x, event.mouse.y,
-                        event.mouse.z, event.mouse.dx, event.mouse.dy, 
+                        event.mouse.z, event.mouse.dx, event.mouse.dy,
                         event.mouse.dz, event.mouse.button);
                 break;
 
                 /* Kad paceļ peles pogu */
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
                 current_state->user_mouse_up(event.mouse.x, event.mouse.y,
-                        event.mouse.z, event.mouse.dx, event.mouse.dy, 
+                        event.mouse.z, event.mouse.dx, event.mouse.dy,
                         event.mouse.dz, event.mouse.button);
                 break;
             default:
@@ -187,6 +205,6 @@ static void run() {
     }
 
     al_stop_timer(timer);
-    al_destroy_timer(timer); 
+    al_destroy_timer(timer);
     al_destroy_event_queue(queue);
 }
