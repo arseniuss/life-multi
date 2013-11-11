@@ -27,7 +27,7 @@ int mouse_x, mouse_y;
 int debug_player = 1;
 #endif
 
-StateGame::StateGame() {
+StateGame::StateGame() : current_gps(_current_gps) {
     type = STATE_GAME;
     tile_size = 30;
     tile_border = 1;
@@ -52,6 +52,7 @@ StateGame::StateGame() {
     tile_hcount = al_get_bitmap_height(screen_map) / (tile_size + tile_border) + 1;
 
     gps = 0.0;
+    _current_gps = GPS;
 }
 
 StateGame::~StateGame() {
@@ -126,6 +127,18 @@ void StateGame::user_key(int key) {
 
     if (key == ALLEGRO_KEY_C) {
         map.create(map.width, map.height);
+    }
+    
+    if(key == ALLEGRO_KEY_8) {
+        this->_current_gps -= 1;
+        
+        al_set_timer_speed(gps_timer, 1.0 / this->current_gps);
+    }
+    
+    if(key == ALLEGRO_KEY_9) {
+        this->_current_gps += 1;
+        
+        al_set_timer_speed(gps_timer, 1.0 / this->current_gps);
     }
 
     if (key == ALLEGRO_KEY_F12) {
@@ -296,7 +309,7 @@ const char *StateGame::stats() {
             "    tile(%d,%d) @ %d %d = %d\n \n"
 #endif
             "    generation %d.\n"
-            "    gps %f\n"
+            "    gps %f / %d\n"
             "    population 1: %d\n"
             "    population 2: %d\n \n"
             "    map %dx%d\n"
@@ -308,7 +321,7 @@ const char *StateGame::stats() {
             x, y, mouse_x, mouse_y, tile,
 #endif
             map.generation,
-            gps,
+            gps, this->_current_gps,
             map.population1,
             map.population2,
             map.width, map.height,

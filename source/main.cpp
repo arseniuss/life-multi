@@ -25,6 +25,8 @@ using namespace std;
 
 ALLEGRO_DISPLAY *display = NULL;
 State *current_state = NULL;
+ALLEGRO_TIMER *fps_timer;
+ALLEGRO_TIMER *gps_timer;
 
 App app;
 static void run();
@@ -81,18 +83,18 @@ int main(int argc, char** argv) {
     current_state = current_game = new StateGame;
 
     run();
-    
+
     delete current_state;
     al_destroy_font(xsmall_font);
     al_destroy_display(display);
-    
+
     al_shutdown_ttf_addon();
     al_shutdown_font_addon();
     al_shutdown_primitives_addon();
     al_shutdown_image_addon();
-    
+
     al_uninstall_mouse();
-    al_uninstall_keyboard();  
+    al_uninstall_keyboard();
     al_uninstall_system();
 
     return 0;
@@ -131,6 +133,18 @@ static void handle_event(ALLEGRO_EVENT &event) {
                 if (app.stats) app.stats = false;
                 else app.stats = true;
             }
+
+            if (event.keyboard.keycode == ALLEGRO_KEY_F11) {
+                app.current_fps += 1;
+
+                al_set_timer_speed(fps_timer, 1.0 / app.current_fps);
+            }
+
+            if (event.keyboard.keycode == ALLEGRO_KEY_F10) {
+                app.current_fps -= 1;
+
+                al_set_timer_speed(fps_timer, 1.0 / app.current_fps);
+            }
             current_state->user_key(event.keyboard.keycode);
             break;
 
@@ -167,16 +181,14 @@ static void handle_event(ALLEGRO_EVENT &event) {
 
 static void run() {
     ALLEGRO_EVENT_QUEUE *queue;
-    ALLEGRO_TIMER *fps_timer;
-    ALLEGRO_TIMER *gps_timer;
 
     if (!(queue = al_create_event_queue()))
         abort("Count not create event queue!");
 
-    if (!(fps_timer = al_create_timer(1.0 / FPS)))
+    if (!(fps_timer = al_create_timer(1.0 / app.current_fps)))
         abort("Count not create timer!");
 
-    if (!(gps_timer = al_create_timer(1.0 / GPS)))
+    if (!(gps_timer = al_create_timer(1.0 / current_game->current_gps)))
         abort("Count not create timer!");
 
     al_register_event_source(queue, al_get_keyboard_event_source());

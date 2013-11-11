@@ -13,6 +13,7 @@
 class StateGame : public State {
 private:
     double gps;
+    int _current_gps;
     
     int scroll_x, scroll_tile_x;
     int scroll_y, scroll_tile_y;
@@ -23,6 +24,8 @@ private:
     int tile_wcount;
     int tile_hcount;
 public:
+    const int &current_gps;
+    
     Map map;
     StateGame();
     ~StateGame();

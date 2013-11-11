@@ -31,13 +31,13 @@ void draw_stats() {
     dend = al_get_time();
 
     double dtime = (dend - dstart);
-    if (dtime >= 1.0) {
+    if (dtime > 1.0) {
         fps = dcount / dtime;
         dstart = dend;
         dcount = 0;
     }
 
-    sprintf(output, "Statistics:\n    fps %f\n", fps);
+    sprintf(output, "Statistics:\n    fps %f / %d\n", fps, app.current_fps);
 
     const char *state_stats = current_state->stats();
 
