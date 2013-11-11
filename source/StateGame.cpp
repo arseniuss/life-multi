@@ -53,7 +53,7 @@ StateGame::StateGame() : map(_map) {
 }
 
 StateGame::~StateGame() {
-    al_free(screen_map);
+    al_destroy_bitmap(screen_map);
 }
 
 void StateGame::draw() {
@@ -125,6 +125,10 @@ void StateGame::user_key(int key) {
     if (key == ALLEGRO_KEY_C) {
         _map.create(map.width, map.height);
     }
+    
+    if(key == ALLEGRO_KEY_F12) {
+        app.loop = false;
+    }
 #endif
 }
 
@@ -133,7 +137,7 @@ void StateGame::user_key(int key) {
  */
 void StateGame::user_display() {
     //iznīcinam veco logu un izveidojam jaunu
-    al_free(screen_map);
+    al_destroy_bitmap(screen_map);
     screen_map = al_create_bitmap(al_get_display_width(display),
             al_get_display_height(display));
 

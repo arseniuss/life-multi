@@ -78,19 +78,21 @@ int main(int argc, char** argv) {
     if (!(xsmall_font = al_load_ttf_font(XSMALLFONT_TTF, 10, 0)))
         abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
-    current_game = new StateGame;
-    current_state = current_game;
+    current_state = current_game = new StateGame;
 
     run();
-
-    al_free(xsmall_font);
+    
+    delete current_state;
+    al_destroy_font(xsmall_font);
+    al_destroy_display(display);
+    
     al_shutdown_ttf_addon();
     al_shutdown_font_addon();
     al_shutdown_primitives_addon();
     al_shutdown_image_addon();
+    
     al_uninstall_mouse();
-    al_uninstall_keyboard();
-    al_destroy_display(display);
+    al_uninstall_keyboard();  
     al_uninstall_system();
 
     return 0;
