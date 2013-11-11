@@ -135,8 +135,8 @@ void StateGame::user_key(int key) {
     if (key == ALLEGRO_KEY_S) {
         this->save("test_file");
     }
-    
-    if(key == ALLEGRO_KEY_L) {
+
+    if (key == ALLEGRO_KEY_L) {
         this->load("test_file");
     }
 #endif

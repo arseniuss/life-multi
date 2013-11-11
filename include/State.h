@@ -18,18 +18,16 @@
 
 #pragma once
 
-#ifdef __cplusplus
+#include <allegro5/allegro.h>
 
-#    include <allegro5/allegro.h>
-
-#    include "debug.h"
+#include "debug.h"
 
 /* Nezināms spēles stāvoklis */
-#    define STATE_UNKNOWN                   0
+#define STATE_UNKNOWN                   0
 /* Vienkarši izejams stāvoklis (nav jāsaglabā) */
-#    define STATE_SIMPLE                    1
+#define STATE_SIMPLE                    1
 /* Notiek spēle */
-#    define STATE_GAME                      2
+#define STATE_GAME                      2
 
 class State {
 private:
@@ -46,8 +44,8 @@ public:
     /* Pārzīmē stāvokli uz ekrāna */
     virtual void draw() {
     };
-    
-    virtual void update() {   
+
+    virtual void update() {
     };
 
     /* Apstrādā lietotaja nospiesto tastatūras taustiņu */
@@ -72,5 +70,3 @@ public:
         return NULL;
     };
 };
-
-#endif

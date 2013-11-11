@@ -8,9 +8,9 @@
 #include <allegro5/allegro.h>
 #include <cstdio>
 
+#include "State.h"
 #include "debug.h"
 #include "global.h"
-#include "State.h"
 
 ALLEGRO_FONT *xsmall_font;
 
