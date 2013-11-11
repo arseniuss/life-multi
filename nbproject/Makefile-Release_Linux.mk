@@ -59,7 +59,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lallegro_ttf
+LDLIBSOPTIONS=-lallegro -lallegro_font -lallegro_image -lallegro_main -lallegro_primitives -lallegro_ttf -lallegro_dialog
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

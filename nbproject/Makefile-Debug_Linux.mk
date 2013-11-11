@@ -46,11 +46,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-pthread -lrt
+CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-pthread -lrt
-CXXFLAGS=-pthread -lrt
+CCFLAGS=
+CXXFLAGS=
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -59,7 +59,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lallegro -lallegro_font -lallegro_image -lallegro_main -lallegro_primitives -lallegro_ttf
+LDLIBSOPTIONS=-lallegro -lallegro_font -lallegro_image -lallegro_main -lallegro_primitives -lallegro_ttf -lallegro_dialog
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -72,42 +72,42 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi: ${OBJECTFILES}
 ${OBJECTDIR}/source/Map.o: nbproject/Makefile-${CND_CONF}.mk source/Map.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Map.o source/Map.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Map.o source/Map.cpp
 
 ${OBJECTDIR}/source/StateGame.o: nbproject/Makefile-${CND_CONF}.mk source/StateGame.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateGame.o source/StateGame.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateGame.o source/StateGame.cpp
 
 ${OBJECTDIR}/source/StateMenu.o: nbproject/Makefile-${CND_CONF}.mk source/StateMenu.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
 
 ${OBJECTDIR}/source/debug.o: nbproject/Makefile-${CND_CONF}.mk source/debug.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/debug.o source/debug.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/debug.o source/debug.cpp
 
 ${OBJECTDIR}/source/draw_text.o: nbproject/Makefile-${CND_CONF}.mk source/draw_text.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
 
 ${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
 
 ${OBJECTDIR}/source/main.o: nbproject/Makefile-${CND_CONF}.mk source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
 ${OBJECTDIR}/source/network.o: nbproject/Makefile-${CND_CONF}.mk source/network.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -pthread -lrt -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/network.o source/network.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/network.o source/network.cpp
 
 # Subprojects
 .build-subprojects:

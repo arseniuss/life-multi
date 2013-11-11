@@ -51,7 +51,6 @@
           <incDir>
             <pElem>include</pElem>
           </incDir>
-          <commandLine>-pthread -lrt</commandLine>
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
@@ -62,7 +61,6 @@
           <incDir>
             <pElem>include</pElem>
           </incDir>
-          <commandLine>-pthread -lrt</commandLine>
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
@@ -77,6 +75,7 @@
             <linkerLibLibItem>allegro_main</linkerLibLibItem>
             <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -144,10 +143,12 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -201,10 +202,12 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -258,10 +261,12 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

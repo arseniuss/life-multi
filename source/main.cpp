@@ -8,6 +8,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <cmath>
@@ -37,6 +38,7 @@ int main(int argc, char** argv) {
         abort("Could not init Allegro!");
 
     al_set_app_name(APP_NAME);
+    al_set_org_name(APP_NAME);
 
     uint32_t version = al_get_allegro_version();
     int major = version >> 24;
@@ -48,8 +50,14 @@ int main(int argc, char** argv) {
 
     //TODO: check if is usable Allegro version
 
+    al_init_native_dialog_addon();
+
     //TODO: configuration allow or disallow resize
-    al_set_new_display_flags(ALLEGRO_RESIZABLE);
+    al_set_new_display_flags(ALLEGRO_RESIZABLE
+#if PLATFORM == PLATFORM_UNIX
+            | ALLEGRO_GTK_TOPLEVEL
+#endif
+            );
 
     //TODO: detect display or use configuration
     if (!(display = al_create_display(500, 500)))
