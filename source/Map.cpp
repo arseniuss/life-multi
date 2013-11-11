@@ -18,7 +18,7 @@
  * 
  */
 
-int Map::pos(int x, int y) const{
+int Map::pos(int x, int y) const {
     return POS(data, x, y, width, height);
 }
 
@@ -45,4 +45,19 @@ int Map::NextGeneration() {
     buf = tmp;
 
     return _generation++;
+}
+
+void Map::load(void* buf, int sz, int w, int h, int g) {
+    if(data) free(data);
+    data = (unsigned char *)buf;
+    _size = sz;
+    _width = w;
+    _height = h;
+    _generation = g;
+}
+
+void Map::save(void*& buffer, int& sz) const {
+    buffer = (void *)malloc(_size);
+    memcpy(buffer, data, _size);
+    sz = _size;
 }

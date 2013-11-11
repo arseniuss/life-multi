@@ -7,13 +7,15 @@
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
+#include <cstdio>
 #include <cstdlib>
+#include <iosfwd>
 
 #include "Map.h"
 #include "StateGame.h"
+#include "config.h"
 #include "debug.h"
 #include "global.h"
-#include "config.h"
 
 bool button_1_down = false;
 class StateGame *current_game = NULL;
@@ -25,12 +27,12 @@ int mouse_x, mouse_y;
 int debug_player = 1;
 #endif
 
-StateGame::StateGame() : map(_map) {
+StateGame::StateGame() {
     type = STATE_GAME;
     tile_size = 30;
     tile_border = 1;
 
-    _map.create(100, 100);
+    map.create(100, 100);
 
     //ekrāna visus koordinātas
     int dcrx = al_get_display_width(display) / 2;
@@ -123,11 +125,19 @@ void StateGame::user_key(int key) {
     }
 
     if (key == ALLEGRO_KEY_C) {
-        _map.create(map.width, map.height);
+        map.create(map.width, map.height);
+    }
+
+    if (key == ALLEGRO_KEY_F12) {
+        app.loop = false;
+    }
+
+    if (key == ALLEGRO_KEY_S) {
+        this->save("test_file");
     }
     
-    if(key == ALLEGRO_KEY_F12) {
-        app.loop = false;
+    if(key == ALLEGRO_KEY_L) {
+        this->load("test_file");
     }
 #endif
 }
@@ -260,7 +270,7 @@ void StateGame::update() {
     gps_gen2 = gps_gen1;
 
     if (!app.pause) {
-        gps_gen1 = _map.NextGeneration();
+        gps_gen1 = map.NextGeneration();
     }
 
     //Ģenerācijas sekundē aprēķins
@@ -305,4 +315,82 @@ const char *StateGame::stats() {
             map.size, map.size / 1024);
 
     return buf;
+}
+
+int StateGame::save(const char* filename) {
+    FILE * fout;
+    void * buff;
+    int buf_sz;
+
+    if (!(fout = fopen(filename, "w"))) {
+        return -1;
+    }
+
+    fprintf(fout, "LifeGame v%d.%d", (APP_VERSION >> 8) & 0xFF,
+            (APP_VERSION & 0xFF));
+
+    fwrite(&scroll_x, sizeof (scroll_x), 1, fout);
+    fwrite(&scroll_y, sizeof (scroll_y), 1, fout);
+    fwrite(&scroll_tile_x, sizeof (scroll_tile_x), 1, fout);
+    fwrite(&scroll_tile_y, sizeof (scroll_tile_y), 1, fout);
+
+    fwrite(&tile_size, sizeof (tile_size), 1, fout);
+    fwrite(&tile_border, sizeof (tile_border), 1, fout);
+
+    fwrite(&map.width, sizeof (map.width), 1, fout);
+    fwrite(&map.height, sizeof (map.height), 1, fout);
+    fwrite(&map.generation, sizeof (map.generation), 1, fout);
+    fwrite(&map.size, sizeof (map.size), 1, fout);
+
+    map.save(buff, buf_sz);
+    fwrite(buff, 1, buf_sz, fout);
+
+    fclose(fout);
+
+    return 0;
+}
+
+int StateGame::load(const char* filename) {
+    FILE * fin;
+    int v_upper;
+    int v_lower;
+    void * buff;
+    int map_width;
+    int map_height;
+    int map_size;
+    int map_generation;
+
+    if (!(fin = fopen(filename, "r"))) {
+        return -1;
+    }
+
+    fscanf(fin, "LifeGame v%d.%d", &v_upper, &v_lower);
+
+    if (((v_upper << 8) | v_lower) != APP_VERSION) {
+        debug("Unknown version %d %d!\n", v_upper, v_lower);
+
+        return -1;
+    }
+
+    fread(&scroll_x, sizeof (scroll_x), 1, fin);
+    fread(&scroll_y, sizeof (scroll_y), 1, fin);
+    fread(&scroll_tile_x, sizeof (scroll_tile_x), 1, fin);
+    fread(&scroll_tile_y, sizeof (scroll_tile_y), 1, fin);
+
+    fread(&tile_size, sizeof (tile_size), 1, fin);
+    fread(&tile_border, sizeof (tile_border), 1, fin);
+
+    fread(&map_width, sizeof (map_width), 1, fin);
+    fread(&map_height, sizeof (map_height), 1, fin);
+    fread(&map_generation, sizeof (map_generation), 1, fin);
+    fread(&map_size, sizeof (map_size), 1, fin);
+
+    buff = malloc(map_size);
+    fread(buff, map_size, 1, fin);
+
+    map.load(buff, map_size, map_width, map_height, map_generation);
+
+    fclose(fin);
+
+    return 0;
 }

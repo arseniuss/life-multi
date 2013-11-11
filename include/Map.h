@@ -92,6 +92,8 @@ public:
     void set(int x, int y, int v) const;
 
     int NextGeneration();
+    void save(void *&buffer, int &sz) const;
+    void load(void * buffer, int sz, int w, int h, int g);
 };
 
 

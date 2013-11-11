@@ -26,6 +26,7 @@
 #define GPS                             8
 
 #define APP_NAME                        "Life Game Multiplayer"
+#define APP_VERSION                     0x100
 
 #define XSMALLFONT_TTF                  "resources/DejaVuSans.ttf"
 

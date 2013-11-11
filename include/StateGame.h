@@ -12,7 +12,6 @@
 
 class StateGame : public State {
 private:
-    int generation;
     double gps;
     
     int scroll_x, scroll_tile_x;
@@ -23,9 +22,8 @@ private:
     int tile_border;
     int tile_wcount;
     int tile_hcount;
-    Map _map;
 public:
-    const Map &map;
+    Map map;
     StateGame();
     ~StateGame();
     void draw();
@@ -36,6 +34,8 @@ public:
     void user_mouse_down(int x, int y, int z, int dx, int dy, int dz, int button);
     void user_mouse_up(int x, int y, int z, int dx, int dy, int dz, int button);
     const char * stats();
+    int save(const char *filename);
+    int load(const char *filename);
 };
 
 extern class StateGame *current_game;
