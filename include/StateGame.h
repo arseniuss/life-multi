@@ -13,10 +13,14 @@
 class StateGame : public State {
 private:
     int generation;
+    double gps;
+    
     int scroll_x, scroll_tile_x;
     int scroll_y, scroll_tile_y;
     ALLEGRO_BITMAP *screen_map;
+    
     int tile_size;
+    int tile_border;
     int tile_wcount;
     int tile_hcount;
     Map _map;

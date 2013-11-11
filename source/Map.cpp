@@ -35,7 +35,7 @@ int Map::NextGeneration() {
             int ret = conways_fn(i, j);
 
             if (ret == TILE_PLAYER1) _population1++;
-            if (ret == TILE_PLAYER2) _population2++;
+            if (ret == TILE_PLAYER2 || ret == TILE_SEEN_PLAYER2) _population2++;
 
             SET(buf, i, j, ret, width, height);
         }

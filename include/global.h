@@ -20,22 +20,24 @@
 #define TILE_SEEN_PLAYER2       6
 #define TILE_FREE               TILE_SEEN_MASK
 
-
-
 typedef struct {
     char coord[3][3];
 } part_t;
 
 class App {
 public:
-    bool loop;
-    bool stats;
-    bool pause;
+    bool loop; //cikloties un neiziet no spēlēs
+    bool stats; //rādīt statistiku
+    bool pause; //pauzēt spēli
+    bool need_redraw; //var ir nepieciešama pārzīmēšana
+    bool need_update; //vai ir nepieciešama spēles atjaunošana
 
     App() {
-        loop = true; //cikloties un neiziet no spēlēs
-        stats = true; //rādīt statistiku
+        loop = true;
+        stats = true;
         pause = false;
+        need_redraw = false;
+        need_update = false;
     };
 };
 

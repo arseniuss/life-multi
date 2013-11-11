@@ -68,6 +68,7 @@ public:
         _width = w;
         _height = h;
         _size = (w * h) / 2;
+        _generation = 0;
         data = (unsigned char *) malloc(_size);
         buf = (unsigned char *) malloc(_size);
         for (int i = 0; i < w; i++)

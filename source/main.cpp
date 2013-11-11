@@ -10,6 +10,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 
@@ -77,6 +78,9 @@ int main(int argc, char** argv) {
     if (!(xsmall_font = al_load_ttf_font(XSMALLFONT_TTF, 10, 0)))
         abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
+    current_game = new StateGame;
+    current_state = current_game;
+
     run();
 
     al_free(xsmall_font);
@@ -92,119 +96,132 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+static void handle_event(ALLEGRO_EVENT &event) {
+    switch (event.type) {
+            /* Kad pele iziet no loga */
+        case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
+            break;
+
+            /* Kad pele atgriežas logā*/
+        case ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY:
+            break;
+
+            /* Kad maina loga izmēru*/
+        case ALLEGRO_EVENT_DISPLAY_RESIZE:
+            al_acknowledge_resize(event.display.source);
+            current_state->user_display();
+            app.need_redraw = true;
+            break;
+
+            /* Kad aizver logu */
+        case ALLEGRO_EVENT_DISPLAY_CLOSE:
+            if (current_state->type == STATE_GAME) {
+                //goto StateSave(current_state)
+            } else {
+                return;
+            }
+            break;
+
+            /* Kad nospiež kādu klaviatūras taustiņu*/
+        case ALLEGRO_EVENT_KEY_CHAR:
+            //izslēgt/ieslēgt statistikas rādīšanu
+            if (event.keyboard.keycode == ALLEGRO_KEY_F1) {
+                if (app.stats) app.stats = false;
+                else app.stats = true;
+            }
+            current_state->user_key(event.keyboard.keycode);
+            break;
+
+        case ALLEGRO_EVENT_KEY_DOWN:
+            break;
+        case ALLEGRO_EVENT_KEY_UP:
+            break;
+            /* Kad pakustina peli */
+        case ALLEGRO_EVENT_MOUSE_AXES:
+            current_state->user_mouse(event.mouse.x, event.mouse.y,
+                    event.mouse.z, event.mouse.dx, event.mouse.dy,
+                    event.mouse.dz);
+            app.need_redraw = true;
+            break;
+
+            /* Kad nospiež peles pogu */
+        case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+            current_state->user_mouse_down(event.mouse.x, event.mouse.y,
+                    event.mouse.z, event.mouse.dx, event.mouse.dy,
+                    event.mouse.dz, event.mouse.button);
+            break;
+
+            /* Kad paceļ peles pogu */
+        case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+            current_state->user_mouse_up(event.mouse.x, event.mouse.y,
+                    event.mouse.z, event.mouse.dx, event.mouse.dy,
+                    event.mouse.dz, event.mouse.button);
+            break;
+        default:
+            debug("Unknown event {type: %d}\n", event.type);
+            break;
+    }
+}
+
 static void run() {
     ALLEGRO_EVENT_QUEUE *queue;
-    ALLEGRO_TIMER *timer;
-    ALLEGRO_TIMER *game_update;
+    ALLEGRO_TIMER *fps_timer;
+    ALLEGRO_TIMER *gps_timer;
 
     if (!(queue = al_create_event_queue()))
         abort("Count not create event queue!");
 
-    if (!(timer = al_create_timer(1.0 / FPS)))
+    if (!(fps_timer = al_create_timer(1.0 / FPS)))
         abort("Count not create timer!");
 
-    if (!(game_update = al_create_timer(1.0/8.0)))
-        abort("Could not create game update timer!");
+    if (!(gps_timer = al_create_timer(1.0 / GPS)))
+        abort("Count not create timer!");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
-    al_register_event_source(queue, al_get_timer_event_source(timer));
-    al_register_event_source(queue, al_get_timer_event_source(game_update));
+    al_register_event_source(queue, al_get_timer_event_source(fps_timer));
+    al_register_event_source(queue, al_get_timer_event_source(gps_timer));
     al_register_event_source(queue, al_get_display_event_source(display));
 
-    al_start_timer(timer);
-    al_start_timer(game_update);
-
-    ALLEGRO_EVENT event;
-    bool need_redraw = false;  
-    current_game = new StateGame;
-    current_state = current_game;
+    al_start_timer(fps_timer);
+    al_start_timer(gps_timer);
 
     while (app.loop) {
-        if (need_redraw && al_event_queue_is_empty(queue)) {
-            current_state->draw();
-            draw_stats();
-            al_wait_for_vsync();
-            al_flip_display();
-            need_redraw = false;
+        while (!al_is_event_queue_empty(queue)) {
+            ALLEGRO_EVENT event;
+
+            al_wait_for_event(queue, &event);
+
+            switch (event.type) {
+                case ALLEGRO_EVENT_TIMER:
+                    if (event.timer.source == fps_timer) {
+                        app.need_redraw = true;
+                    } else if (event.timer.source == gps_timer) {
+                        app.need_update = true;
+                    }
+                    break;
+                default:
+                    handle_event(event);
+                    break;
+            }
         }
 
-        al_wait_for_event(queue, &event);
+        if (app.need_redraw) {
+            current_state->draw();
+            if (app.stats) draw_stats();
+            al_flip_display();
+            app.need_redraw = false;
+        }
 
-        switch (event.type) {
-                /* Kad pele iziet no loga */
-            case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
-                break;
-
-                /* Kad pele atgriežas logā*/
-            case ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY:
-                break;
-
-                /* Kad maina loga izmēru*/
-            case ALLEGRO_EVENT_DISPLAY_RESIZE:
-                al_acknowledge_resize(event.display.source);
-                current_state->user_display();
-                need_redraw = true;
-                break;
-
-                /* Kad aizver logu */
-            case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                if (current_state->type == STATE_GAME) {
-                    //goto StateSave(current_state)
-                } else {
-                    return;
-                }
-                break;
-
-                /* Kad nospiež kādu klaviatūras taustiņu*/
-            case ALLEGRO_EVENT_KEY_CHAR:
-                current_state->user_key(event.keyboard.keycode);
-                break;
-
-            case ALLEGRO_EVENT_KEY_DOWN:
-                break;
-            case ALLEGRO_EVENT_KEY_UP:
-                break;
-
-                /* Taimeris */
-            case ALLEGRO_EVENT_TIMER:
-                if (event.timer.source == game_update) {
-                    current_state->update();
-                }
-
-                if (event.timer.source == timer) {
-                    need_redraw = true;
-                }
-                break;
-
-                /* Kad pakustina peli */
-            case ALLEGRO_EVENT_MOUSE_AXES:
-                current_state->user_mouse(event.mouse.x, event.mouse.y,
-                        event.mouse.z, event.mouse.dx, event.mouse.dy,
-                        event.mouse.dz);
-                need_redraw = true;
-                break;
-
-                /* Kad nospiež peles pogu */
-            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                current_state->user_mouse_down(event.mouse.x, event.mouse.y,
-                        event.mouse.z, event.mouse.dx, event.mouse.dy,
-                        event.mouse.dz, event.mouse.button);
-                break;
-
-                /* Kad paceļ peles pogu */
-            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-                current_state->user_mouse_up(event.mouse.x, event.mouse.y,
-                        event.mouse.z, event.mouse.dx, event.mouse.dy,
-                        event.mouse.dz, event.mouse.button);
-                break;
-            default:
-                debug("Unknown event {type: %d}\n", event.type);
-                break;
+        if (app.need_update) {
+            current_state->update();
+            app.need_update = false;
         }
     }
 
-    al_stop_timer(timer);
-    al_destroy_timer(timer);
+    al_stop_timer(fps_timer);
+    al_stop_timer(gps_timer);
+    al_destroy_timer(fps_timer);
+    al_destroy_timer(gps_timer);
     al_destroy_event_queue(queue);
 }

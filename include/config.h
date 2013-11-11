@@ -22,7 +22,8 @@
 #    error "Unknown environment!"
 #endif
 
-#define FPS             32
+#define FPS                             32
+#define GPS                             8
 
 #define APP_NAME                        "Life Game Multiplayer"
 

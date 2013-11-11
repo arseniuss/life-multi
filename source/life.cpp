@@ -71,7 +71,7 @@ char conways_fn(int x, int y) {
 
     if (pl1 > 4) return TILE_FREE;
     if (pl2 > 4) {
-        if (pos == TILE_SEEN_PLAYER2 || pos == TILE_FREE)
+        if (pos == TILE_SEEN_PLAYER2 || pos == TILE_FREE || pos == TILE_PLAYER1)
             return TILE_FREE;
         else
             return TILE_UNKNOWN;
@@ -80,9 +80,11 @@ char conways_fn(int x, int y) {
 
     switch (rules[pl1][pl2]) {
         case RULE_DIE:
-            if (pos == TILE_PLAYER2) return TILE_UNKNOWN;
-            if (pos == TILE_UNKNOWN) return TILE_UNKNOWN;
-            return TILE_FREE;
+            if (pl1 > 0) return TILE_FREE;
+            if (pos == TILE_PLAYER1) return TILE_FREE;
+            if (pos == TILE_SEEN_PLAYER2) return TILE_FREE;
+            if (pos == TILE_FREE) return TILE_FREE;
+            return TILE_UNKNOWN;
         case RULE_STAY:
             if (pl1 > 0 && pos == TILE_UNKNOWN) return TILE_FREE;
             if (pl1 > 0 && pos == TILE_PLAYER2) return TILE_SEEN_PLAYER2;
