@@ -88,11 +88,17 @@ int main(int argc, char** argv) {
     if (!(xsmall_font = al_load_ttf_font(XSMALLFONT_TTF, 10, 0)))
         abort("Could not load font @ %s\n", XSMALLFONT_TTF);
 
-    current_state = current_game = new StateGame;
+    if (!(pixelette = al_load_ttf_font(PIXELETTE_TTF, 50, 0)))
+        abort("Could not load font @ %s\n", PIXELETTE_TTF);
+
+    //current_state = current_game = new StateGame;
+    current_state = new StateMenu;
+    current_game = NULL;
 
     run();
 
     delete current_state;
+    al_destroy_font(pixelette);
     al_destroy_font(xsmall_font);
     al_destroy_display(display);
 
@@ -103,7 +109,7 @@ int main(int argc, char** argv) {
 
     al_uninstall_mouse();
     al_uninstall_keyboard();
-    al_uninstall_system();
+    //al_uninstall_system();
 
     return 0;
 }
@@ -120,11 +126,20 @@ static void handle_event(ALLEGRO_EVENT &event) {
 
             /* Kad maina loga izmēru*/
         case ALLEGRO_EVENT_DISPLAY_RESIZE:
+        {
             al_acknowledge_resize(event.display.source);
             current_state->user_display();
             app.need_redraw = true;
-            break;
 
+            int display_w = al_get_display_width(display);
+            int display_h = al_get_display_height(display);
+
+            if (display_w < MIN_DISPLAY_WIDTH) display_w = MIN_DISPLAY_WIDTH;
+            if (display_h < MIN_DISPLAY_HEIGHT) display_h = MIN_DISPLAY_HEIGHT;
+
+            al_resize_display(display, display_w, display_h);
+            break;
+        }
             /* Kad aizver logu */
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
             if (current_state->type == STATE_GAME) {
@@ -140,6 +155,11 @@ static void handle_event(ALLEGRO_EVENT &event) {
             if (event.keyboard.keycode == ALLEGRO_KEY_F1) {
                 if (app.stats) app.stats = false;
                 else app.stats = true;
+            }
+
+            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE) {
+                //TODO: if(current_state->destroy) ... else ...
+                app.loop = false;
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_F11) {
@@ -196,17 +216,20 @@ static void run() {
     if (!(fps_timer = al_create_timer(1.0 / app.current_fps)))
         abort("Count not create timer!");
 
-    if (!(gps_timer = al_create_timer(1.0 / current_game->current_gps)))
-        abort("Count not create timer!");
+    //TODO: move to StateGame
+    //    if (!(gps_timer = al_create_timer(1.0 / current_game->current_gps)))
+    //        abort("Count not create timer!");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
     al_register_event_source(queue, al_get_timer_event_source(fps_timer));
-    al_register_event_source(queue, al_get_timer_event_source(gps_timer));
+    //TODO: move to StateGame
+    //al_register_event_source(queue, al_get_timer_event_source(gps_timer));
     al_register_event_source(queue, al_get_display_event_source(display));
 
     al_start_timer(fps_timer);
-    al_start_timer(gps_timer);
+    //TODO: move to StateGame
+    //al_start_timer(gps_timer);
 
     while (app.loop) {
         while (!al_is_event_queue_empty(queue)) {
@@ -229,6 +252,7 @@ static void run() {
         }
 
         if (app.need_redraw) {
+            al_clear_to_color(al_map_rgb(0, 0, 0));
             current_state->draw();
             if (app.stats) draw_stats();
             al_flip_display();
@@ -242,8 +266,8 @@ static void run() {
     }
 
     al_stop_timer(fps_timer);
-    al_stop_timer(gps_timer);
+    //al_stop_timer(gps_timer);
     al_destroy_timer(fps_timer);
-    al_destroy_timer(gps_timer);
+    //al_destroy_timer(gps_timer);
     al_destroy_event_queue(queue);
 }

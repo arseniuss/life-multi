@@ -32,7 +32,7 @@ StateGame::StateGame() : current_gps(_current_gps) {
     tile_size = 30;
     tile_border = 1;
 
-    map.create(100, 100);
+    map.create(512, 512);
 
     //ekrāna visus koordinātas
     int dcrx = al_get_display_width(display) / 2;
@@ -107,13 +107,9 @@ void StateGame::draw() {
 }
 
 void StateGame::user_key(int key) {
-
-    switch (key) {
-            //pauze
-        case ALLEGRO_KEY_P:
-            if (app.pause) app.pause = false;
-            else app.pause = true;
-            break;
+    if (key == ALLEGRO_KEY_P) {
+        if (app.pause) app.pause = false;
+        else app.pause = true;
     }
 
 #ifdef DEBUG
@@ -128,16 +124,16 @@ void StateGame::user_key(int key) {
     if (key == ALLEGRO_KEY_C) {
         map.create(map.width, map.height);
     }
-    
-    if(key == ALLEGRO_KEY_8) {
+
+    if (key == ALLEGRO_KEY_8) {
         this->_current_gps -= 1;
-        
+
         al_set_timer_speed(gps_timer, 1.0 / this->current_gps);
     }
-    
-    if(key == ALLEGRO_KEY_9) {
+
+    if (key == ALLEGRO_KEY_9) {
         this->_current_gps += 1;
-        
+
         al_set_timer_speed(gps_timer, 1.0 / this->current_gps);
     }
 
@@ -252,16 +248,25 @@ void StateGame::user_mouse_down(int x, int y, int z, int dx, int dy, int dz,
         int py = (y - scroll_y) / (tile_size + tile_border);
 
 #ifdef DEBUG
+        int pos = map.pos(px, py);
+
         switch (debug_player) {
             default:
             case 1:
-                map.set(px, py, TILE_PLAYER1);
+                if (pos != TILE_PLAYER1)
+                    map.set(px, py, TILE_PLAYER1);
+                else
+                    map.set(px, py, TILE_UNKNOWN);
                 break;
             case 2:
-                if (map.pos(px, py) & TILE_SEEN_MASK)
-                    map.set(px, py, TILE_SEEN_PLAYER2);
-                else
-                    map.set(px, py, TILE_PLAYER2);
+                if (pos != TILE_PLAYER2 || pos != TILE_SEEN_PLAYER2) {
+                    if (pos & TILE_SEEN_MASK)
+                        map.set(px, py, TILE_SEEN_PLAYER2);
+                    else
+                        map.set(px, py, TILE_PLAYER2);
+                } else {
+                    map.set(px, py, TILE_UNKNOWN);
+                }
                 break;
         }
 #else

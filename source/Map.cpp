@@ -8,22 +8,23 @@
 #include "Map.h"
 #include "debug.h"
 
-/*
- * Funkcijas, kas apstrādā karti              
- * 
- * 2
- * +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
- * |00|10|10|00|00|10|01|00|11|01|10|11|00|10|00|00|00|00|00|00|10|10|10|11|
- * +-----------+-----------+-----------+-----------+-----------+-----------+
- * 
- */
+void _xy(int &x, int &y, int w, int h) {
+    if (x == -1) x = w - 1;
+    if (y == -1) y = h - 1;
+    if (x == w) x = 0;
+    if (y == h) y = 0;
+}
 
 int Map::pos(int x, int y) const {
-    return POS(data, x, y, width, height);
+    _xy(x, y, width, height);
+
+    return data[x + y * width];
 }
 
 void Map::set(int x, int y, int v) const {
-    SET(data, x, y, v, width, height);
+    _xy(x, y, width, height);
+
+    data[x + y * width] = v;
 }
 
 int Map::NextGeneration() {
@@ -37,7 +38,7 @@ int Map::NextGeneration() {
             if (ret == TILE_PLAYER1) _population1++;
             if (ret == TILE_PLAYER2 || ret == TILE_SEEN_PLAYER2) _population2++;
 
-            SET(buf, i, j, ret, width, height);
+            buf[i + j * width] = ret;
         }
 
     unsigned char *tmp = data;
@@ -48,8 +49,8 @@ int Map::NextGeneration() {
 }
 
 void Map::load(void* buf, int sz, int w, int h, int g) {
-    if(data) free(data);
-    data = (unsigned char *)buf;
+    if (data) free(data);
+    data = (unsigned char *) buf;
     _size = sz;
     _width = w;
     _height = h;
@@ -57,7 +58,7 @@ void Map::load(void* buf, int sz, int w, int h, int g) {
 }
 
 void Map::save(void*& buffer, int& sz) const {
-    buffer = (void *)malloc(_size);
+    buffer = (void *) malloc(_size);
     memcpy(buffer, data, _size);
     sz = _size;
 }

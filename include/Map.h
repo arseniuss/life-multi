@@ -12,37 +12,6 @@
 
 #include "global.h"
 
-static inline void _xy(int &x, int &y, int w, int h) {
-    if (x == -1) x = w - 1;
-    if (y == -1) y = h - 1;
-    if (x == w) x = 0;
-    if (y == h) y = 0;
-}
-
-static inline int POS(const unsigned char *data, int x, int y, int w, int h) {
-    _xy(x, y, w, h);
-
-    int coord = x + y * w;
-    int idx = coord / 2;
-    int off = (coord % 2)*4;
-
-    return (data[idx] >> off) & 0xF;
-}
-
-static inline void SET(unsigned char *data, int x, int y, int v, int w, int h) {
-    _xy(x, y, w, h);
-    v &= 0xF;
-
-    int coord = x + y * w;
-    int idx = coord / 2;
-    int off = (coord % 2)*4;
-
-    //nodzēš
-    data[idx] &= ~(0xF << off);
-    //uzliek
-    data[idx] |= (v << off);
-}
-
 class Map {
 private:
     unsigned char *data;
@@ -67,7 +36,7 @@ public:
         if (data) free(data);
         _width = w;
         _height = h;
-        _size = (w * h) / 2;
+        _size = w * h;
         _generation = 0;
         data = (unsigned char *) malloc(_size);
         buf = (unsigned char *) malloc(_size);

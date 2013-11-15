@@ -29,6 +29,7 @@
 #define APP_VERSION                     0x100
 
 #define XSMALLFONT_TTF                  "resources/DejaVuSans.ttf"
+#define PIXELETTE_TTF                   "resources/pixelated.ttf"
 
 #define MIN_DISPLAY_WIDTH               500
 #define MIN_DISPLAY_HEIGHT              500
