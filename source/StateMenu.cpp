@@ -23,7 +23,6 @@ StateMenu::StateMenu() {
 
 void StateMenu::draw() {
     ALLEGRO_COLOR c;
-    ;
 
     for (int i = 0; i < MENU_ENTRIES; i++) {
         if (i == current_menu) {
@@ -58,8 +57,8 @@ void StateMenu::user_key(int key) {
                 case MENU_NEW_GAME:
                     current_game = new StateGame;
                     current_state = current_game;
-                    
-                    this->~StateMenu();
+
+                    delete this;
                     break;
                 default:
                     debug("Unimplemented menu entry!\n");

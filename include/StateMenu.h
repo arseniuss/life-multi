@@ -9,6 +9,8 @@
 
 #ifdef __cplusplus
 
+#include <allegro5/allegro.h>
+
 #include "State.h"
 
 #define MENU_ENTRIES                    4

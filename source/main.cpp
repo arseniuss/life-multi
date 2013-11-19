@@ -27,7 +27,7 @@ using namespace std;
 ALLEGRO_DISPLAY *display = NULL;
 State *current_state = NULL;
 ALLEGRO_TIMER *fps_timer;
-ALLEGRO_TIMER *gps_timer;
+ALLEGRO_EVENT_QUEUE *queue;;
 
 App app;
 static void run();
@@ -208,8 +208,6 @@ static void handle_event(ALLEGRO_EVENT &event) {
 }
 
 static void run() {
-    ALLEGRO_EVENT_QUEUE *queue;
-
     if (!(queue = al_create_event_queue()))
         abort("Count not create event queue!");
 
@@ -241,7 +239,7 @@ static void run() {
                 case ALLEGRO_EVENT_TIMER:
                     if (event.timer.source == fps_timer) {
                         app.need_redraw = true;
-                    } else if (event.timer.source == gps_timer) {
+                    } else {
                         app.need_update = true;
                     }
                     break;

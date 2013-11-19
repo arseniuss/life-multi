@@ -53,10 +53,17 @@ StateGame::StateGame() : current_gps(_current_gps) {
 
     gps = 0.0;
     _current_gps = GPS;
+
+    gps_timer = al_create_timer(1.0 / GPS);
+
+    al_register_event_source(queue, al_get_timer_event_source(gps_timer));
+    al_start_timer(gps_timer);
 }
 
 StateGame::~StateGame() {
     al_destroy_bitmap(screen_map);
+    al_unregister_event_source(queue, al_get_timer_event_source(gps_timer));
+    al_destroy_timer(gps_timer);
 }
 
 void StateGame::draw() {
@@ -198,22 +205,22 @@ void StateGame::user_mouse(int x, int y, int z, int dx, int dy, int dz) {
         int old_border = tile_border;
 
         //veicam izmaiņas
-        if (!(tile_size == MIN_TILE_SIZE && dz < 0))
+        if (!(tile_size == MIN_TILE_SIZE && dz < 0)) {
             tile_size += dz;
 
-        //pārrēķinam, cik šūnu var ietilpt logā
-        tile_wcount = al_get_bitmap_width(screen_map) / (tile_size + tile_border) + 1;
-        tile_hcount = al_get_bitmap_height(screen_map) / (tile_size + tile_border) + 1;
+            //pārrēķinam, cik šūnu var ietilpt logā
+            tile_wcount = al_get_bitmap_width(screen_map) / (tile_size + tile_border) + 1;
+            tile_hcount = al_get_bitmap_height(screen_map) / (tile_size + tile_border) + 1;
 
-        //nobīdam karti, lai zem peles būtu tās pašas koordinātas, kas pirms
-        if (dz < 0) {
-            if (tile_size != MIN_TILE_SIZE) {
+            //nobīdam karti, lai zem peles būtu tās pašas koordinātas, kas pirms
+
+            if (dz < 0) {
                 scroll_x += (x - scroll_x) / (old_tile_size + old_border);
                 scroll_y += (y - scroll_y) / (old_tile_size + old_border);
+            } else {
+                scroll_x -= (x - scroll_x) / (old_tile_size + old_border);
+                scroll_y -= (y - scroll_y) / (old_tile_size + old_border);
             }
-        } else {
-            scroll_x -= (x - scroll_x) / (old_tile_size + old_border);
-            scroll_y -= (y - scroll_y) / (old_tile_size + old_border);
         }
     }
 

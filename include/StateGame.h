@@ -23,6 +23,8 @@ private:
     int tile_border;
     int tile_wcount;
     int tile_hcount;
+    
+    ALLEGRO_TIMER *gps_timer;
 public:
     const int &current_gps;
     

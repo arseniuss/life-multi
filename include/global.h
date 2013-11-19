@@ -45,6 +45,7 @@ extern App app;
 extern ALLEGRO_DISPLAY *display;
 extern ALLEGRO_FONT *xsmall_font;
 extern ALLEGRO_FONT *pixelette;
+extern ALLEGRO_EVENT_QUEUE *queue;
 
 extern State *current_state;
 extern ALLEGRO_TIMER *gps_timer;
