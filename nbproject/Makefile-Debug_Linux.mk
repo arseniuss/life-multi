@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/life.o \
 	${OBJECTDIR}/source/main.o \
-	${OBJECTDIR}/source/map.o  \
 	${OBJECTDIR}/source/network.o
 
 
@@ -100,11 +99,6 @@ ${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
 
-${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
-
 ${OBJECTDIR}/source/main.o: nbproject/Makefile-${CND_CONF}.mk source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
@@ -114,11 +108,6 @@ ${OBJECTDIR}/source/network.o: nbproject/Makefile-${CND_CONF}.mk source/network.
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/network.o source/network.cpp
-
-${OBJECTDIR}/source/map.o: nbproject/Makefile-${CND_CONF}.mk source/map.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/map.o source/map.cpp
 
 # Subprojects
 .build-subprojects:

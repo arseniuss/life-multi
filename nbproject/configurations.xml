@@ -19,7 +19,6 @@
       <itemPath>source/draw_text.cpp</itemPath>
       <itemPath>source/life.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
-      <itemPath>source/map.cpp</itemPath>
       <itemPath>source/network.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -114,7 +113,6 @@
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -189,7 +187,6 @@
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -248,7 +245,6 @@
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
@@ -307,7 +303,6 @@
       </item>
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
       <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>

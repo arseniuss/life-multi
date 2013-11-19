@@ -42,7 +42,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/life.o \
 	${OBJECTDIR}/source/main.o \
-	${OBJECTDIR}/source/map.o       \
 	${OBJECTDIR}/source/network.o
 
 
@@ -105,17 +104,10 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
-
-${OBJECTDIR}/source/map.o: source/map.cpp 
-	${MKDIR} -p ${OBJECTDIR}/source
-	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/map.o source/map.cpp
-
 ${OBJECTDIR}/source/network.o: source/network.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/network.o source/network.cpp
-
 
 # Subprojects
 .build-subprojects:
