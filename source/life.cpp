@@ -5,19 +5,6 @@
  * Created on otrdiena, 2013, 29 oktobris, 18:29
  */
 
-/*
- * Funkcijas, kas strādā ar spēles loģiku
- * 
- * +-+-+-+
- * |0|1|2|
- * +-+-+-+
- * |0|1|2|
- * +-+-+-+
- * |0|1|3|
- * +-+-+-+
- * 
- */
-
 #include "debug.h"
 #include "global.h"
 #include "Map.h"
