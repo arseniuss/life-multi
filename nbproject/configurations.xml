@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="89">
+<configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="include" displayName="include" projectFiles="true">
+      <itemPath>include/Map.h</itemPath>
       <itemPath>include/State.h</itemPath>
+      <itemPath>include/StateGame.h</itemPath>
       <itemPath>include/StateMenu.h</itemPath>
       <itemPath>include/config.h</itemPath>
       <itemPath>include/debug.h</itemPath>
       <itemPath>include/global.h</itemPath>
+      <itemPath>include/network.h</itemPath>
     </logicalFolder>
     <logicalFolder name="source" displayName="source" projectFiles="true">
+      <itemPath>source/Map.cpp</itemPath>
+      <itemPath>source/StateGame.cpp</itemPath>
       <itemPath>source/StateMenu.cpp</itemPath>
       <itemPath>source/debug.cpp</itemPath>
       <itemPath>source/draw_text.cpp</itemPath>
       <itemPath>source/life.cpp</itemPath>
       <itemPath>source/main.cpp</itemPath>
       <itemPath>source/map.cpp</itemPath>
+      <itemPath>source/network.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -36,7 +42,6 @@
   <confs>
     <conf name="Debug_Linux" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>true</rebuildPropChanged>
@@ -45,32 +50,45 @@
         <cTool>
           <incDir>
             <pElem>include</pElem>
+            <pElem>/files/lib/allegro/include</pElem>
           </incDir>
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
+          <useLinkerLibraries>false</useLinkerLibraries>
           <warningLevel>2</warningLevel>
         </cTool>
         <ccTool>
           <incDir>
             <pElem>include</pElem>
+            <pElem>/files/lib/allegro/include</pElem>
           </incDir>
           <preprocessorList>
             <Elem>DEBUG</Elem>
           </preprocessorList>
+          <useLinkerLibraries>false</useLinkerLibraries>
           <warningLevel>2</warningLevel>
         </ccTool>
         <linkerTool>
+          <linkerAddLib>
+            <pElem>/files/lib/allegro/lib</pElem>
+          </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -79,6 +97,12 @@
       <item path="include/debug.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/Map.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -91,11 +115,11 @@
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
+      <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release_Linux" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>true</rebuildPropChanged>
@@ -105,6 +129,7 @@
           <developmentMode>5</developmentMode>
           <incDir>
             <pElem>include</pElem>
+            <pElem>/files/lib/allegro/include</pElem>
           </incDir>
           <warningLevel>2</warningLevel>
         </cTool>
@@ -112,6 +137,7 @@
           <developmentMode>5</developmentMode>
           <incDir>
             <pElem>include</pElem>
+            <pElem>/files/lib/allegro/include</pElem>
           </incDir>
           <warningLevel>2</warningLevel>
         </ccTool>
@@ -124,14 +150,20 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -140,6 +172,12 @@
       <item path="include/debug.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/Map.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -152,11 +190,11 @@
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
+      <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Debug_Windows" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
@@ -171,14 +209,20 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -187,6 +231,12 @@
       <item path="include/debug.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/Map.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -199,11 +249,11 @@
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
+      <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release_Windows" type="1">
       <toolsSet>
-        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
@@ -218,14 +268,20 @@
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>allegro</linkerLibLibItem>
-            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_font</linkerLibLibItem>
             <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
             <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="include/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/State.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/StateGame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/StateMenu.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -234,6 +290,12 @@
       <item path="include/debug.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/global.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/network.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="source/Map.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="source/StateGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/StateMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -246,6 +308,7 @@
       <item path="source/main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="source/map.cpp" ex="false" tool="1" flavor2="0">
+      <item path="source/network.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

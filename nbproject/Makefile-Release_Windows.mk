@@ -35,12 +35,15 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/source/Map.o \
+	${OBJECTDIR}/source/StateGame.o \
 	${OBJECTDIR}/source/StateMenu.o \
 	${OBJECTDIR}/source/debug.o \
 	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/life.o \
 	${OBJECTDIR}/source/main.o \
-	${OBJECTDIR}/source/map.o
+	${OBJECTDIR}/source/map.o       \
+	${OBJECTDIR}/source/network.o
 
 
 # C Compiler Flags
@@ -57,7 +60,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lallegro_ttf
+LDLIBSOPTIONS=-lallegro -lallegro_font -lallegro_image -lallegro_main -lallegro_primitives -lallegro_ttf -lallegro_dialog
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -66,6 +69,16 @@ LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lal
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/source/Map.o: source/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Map.o source/Map.cpp
+
+${OBJECTDIR}/source/StateGame.o: source/StateGame.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateGame.o source/StateGame.cpp
 
 ${OBJECTDIR}/source/StateMenu.o: source/StateMenu.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -92,10 +105,17 @@ ${OBJECTDIR}/source/main.o: source/main.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
 
+
 ${OBJECTDIR}/source/map.o: source/map.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
 	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/map.o source/map.cpp
+
+${OBJECTDIR}/source/network.o: source/network.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/network.o source/network.cpp
+
 
 # Subprojects
 .build-subprojects:

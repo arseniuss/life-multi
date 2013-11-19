@@ -35,12 +35,15 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/source/Map.o \
+	${OBJECTDIR}/source/StateGame.o \
 	${OBJECTDIR}/source/StateMenu.o \
 	${OBJECTDIR}/source/debug.o \
 	${OBJECTDIR}/source/draw_text.o \
 	${OBJECTDIR}/source/life.o \
 	${OBJECTDIR}/source/main.o \
-	${OBJECTDIR}/source/map.o
+	${OBJECTDIR}/source/map.o  \
+	${OBJECTDIR}/source/network.o
 
 
 # C Compiler Flags
@@ -57,7 +60,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lallegro -lallegro_primitives -lallegro_font -lallegro_image -lallegro_ttf
+LDLIBSOPTIONS=-L/files/lib/allegro/lib -lallegro -lallegro_font -lallegro_image -lallegro_main -lallegro_primitives -lallegro_ttf -lallegro_dialog
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -67,20 +70,35 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/life-multi ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/source/Map.o: nbproject/Makefile-${CND_CONF}.mk source/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/Map.o source/Map.cpp
+
+${OBJECTDIR}/source/StateGame.o: nbproject/Makefile-${CND_CONF}.mk source/StateGame.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateGame.o source/StateGame.cpp
+
 ${OBJECTDIR}/source/StateMenu.o: nbproject/Makefile-${CND_CONF}.mk source/StateMenu.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/StateMenu.o source/StateMenu.cpp
 
 ${OBJECTDIR}/source/debug.o: nbproject/Makefile-${CND_CONF}.mk source/debug.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/debug.o source/debug.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/debug.o source/debug.cpp
 
 ${OBJECTDIR}/source/draw_text.o: nbproject/Makefile-${CND_CONF}.mk source/draw_text.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/draw_text.o source/draw_text.cpp
+
+${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/life.o source/life.cpp
 
 ${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
@@ -90,7 +108,12 @@ ${OBJECTDIR}/source/life.o: nbproject/Makefile-${CND_CONF}.mk source/life.cpp
 ${OBJECTDIR}/source/main.o: nbproject/Makefile-${CND_CONF}.mk source/main.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
 	${RM} $@.d
-	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/main.o source/main.cpp
+
+${OBJECTDIR}/source/network.o: nbproject/Makefile-${CND_CONF}.mk source/network.cpp 
+	${MKDIR} -p ${OBJECTDIR}/source
+	${RM} $@.d
+	$(COMPILE.cc) -g -Wall -DDEBUG -Iinclude -I/files/lib/allegro/include -MMD -MP -MF $@.d -o ${OBJECTDIR}/source/network.o source/network.cpp
 
 ${OBJECTDIR}/source/map.o: nbproject/Makefile-${CND_CONF}.mk source/map.cpp 
 	${MKDIR} -p ${OBJECTDIR}/source
